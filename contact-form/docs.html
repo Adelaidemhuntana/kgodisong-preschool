@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Ajax & PHP Contact Form</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Libraries Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/prism.min.css" rel="stylesheet">
+    <link href="css/docs.css" rel="stylesheet">
+</head>
+
+<body id="top" data-spy="scroll" data-offset="51">
+    <button class="btn btn-lg btn-primary btn-offcanvas" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasSidebar"
+        aria-labelledby="offcanvasSidebarLabel">
+        <div class="offcanvas-header border-bottom">
+            <a href="https://htmlcodex.com/contact-form">
+                <h6 class="fw-bold mb-0">Ajax & PHP Contact Form</h6>
+            </a>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="flex-shrink-0 bg-white">
+                <ul class="list-unstyled ps-0">
+                    <li class="mb-1">
+                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                            data-bs-target="#home-collapse" aria-expanded="true">
+                            Getting Started
+                        </button>
+                        <div class="collapse show" id="home-collapse">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li><a href="#introduction" class="text-body rounded">Introduction</a></li>
+                                <li><a href="#live-demo" class="text-body rounded">Live Demo</a></li>
+                                <li><a href="#file-structure" class="text-body rounded">File Structure</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="mb-1">
+                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                            data-bs-target="#collapse-2" aria-expanded="false">
+                            Installation
+                        </button>
+                        <div class="collapse" id="collapse-2">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li><a href="#setting-up" class="text-body rounded">Setting Up</a></li>
+                                <li><a href="#activation" class="text-body rounded">Activation</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="mb-1">
+                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                            data-bs-target="#collapse-3" aria-expanded="false">
+                            Advance Setting
+                        </button>
+                        <div class="collapse" id="collapse-3">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li><a href="#smtp-settings" class="text-body rounded">SMTP Settings</a></li>
+                                <li><a href="#mobile-settings" class="text-body rounded">Mobile No Settings</a></li>
+                                <li><a href="#error-messages" class="text-body rounded">Error Messages</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="mb-1">
+                        <a class="btn w-100 text-start" href="#troubleshooting">Troubleshooting</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="offcanvas-footer border-top text-center mt-auto p-3">
+            <small>&copy; <a href="https://htmlcodex.com">HTML Codex</a>. All Rights Reserved.
+            </small>
+        </div>
+    </div>
+
+    <div class="container-fluid bg-primary py-5 mb-5">
+        <div class="row">
+            <div class="col-12 text-center">
+                <a href="https://htmlcodex.com/contact-form">
+                    <h1 class="text-white">Ajax & PHP Contact Form</h1>
+                </a>
+                <h4 class="text-white mb-3">Developed by <a class="text-white" href="https://htmlcodex.com">HTML
+                        Codex</a></h4>
+                <h6 class="text-white mb-0">Version 2.0.0</h6>
+            </div>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <h2 class="fw-bold" id="introduction">Introduction</h2>
+        <h5 class="lh-base mb-3">We appreciate your purchase of our premium <b>Ajax & PHP Contact Form</b>. Our form enables you to send mails effortlessly using both the PHP <b>mail()</b> function and the <b>SMTP</b> system. It's designed for easy installation and seamlessly integrates with all templates from <b>HTML Codex</b>. This manual provides a straightforward guide to install the Contact Form and make it fully functional. We've taken great care to simplify the instructions, ensuring a clear and user-friendly experience.</h5>
+
+        <h5 class="fw-bold mb-3">Features</h5>
+        <ul class="mb-3">
+            <li>Ajax, PHP, and Bootstrap v5.3</li>
+            <li>PHP mail() function and SMTP supported</li>
+            <li>Compatible with PHP 5.5 and later, including PHP 8.2</li>
+            <li>Fully responsive layout designed with Bootstrap v5.3</li>
+            <li>Easy to integrate with all templates by HTML Codex</b></li>
+            <li>Clear installation and activation instruction</li>
+        </ul>
+
+        <h5 class="fw-bold mb-3">Requirements</h5>
+        <p class="mb-5">This Contact Form requires at last PHP version 5.5 in your hosting server. Your hosting should
+            allow you to send emails with using the PHP mail() function. You can use SMTP method if the mail() function
+            is not supported.</p>
+
+
+        <h2 class="fw-bold mb-3" id="live-demo">Live Demo</h2>
+        <div class="border rounded p-4 mb-5">
+            <div class="contact-form">
+                <div id="alertMessage"></div>
+                <form id="contactForm" novalidate="novalidate">
+                    <div class="row">
+                        <div class="col-sm-6 control-group">
+                            <input type="text" class="form-control py-2" id="name" placeholder="Your Name"
+                                required="required" data-validation-required-message="Please enter your name" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="col-sm-6 control-group">
+                            <input type="email" class="form-control py-2" id="email" placeholder="Your Email"
+                                required="required" data-validation-required-message="Please enter your email" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="col-sm-6 control-group">
+                            <input type="text" class="form-control py-2" id="mobile" placeholder="Mobile"
+                                required="required" data-validation-required-message="Please enter your mobile number"
+                                pattern="^(?![-. ])[\d().+\- ]{6,14}\d$"
+                                data-validation-pattern-message="Not a valid mobile number" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="col-sm-6 control-group">
+                            <input type="text" class="form-control py-2" id="subject" placeholder="Subject"
+                                required="required" data-validation-required-message="Please enter a subject" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="col-12 control-group">
+                            <textarea class="form-control" rows="4" id="message" placeholder="Message"
+                                required="required"
+                                data-validation-required-message="Please enter your message"></textarea>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary w-100 py-2" type="submit" id="sendMessageButton">
+                                <span>Send Message</span>
+                                <div class="d-none spinner-border spinner-border-sm text-light ms-3" role="status">
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <h2 class="fw-bold" id="file-structure">File Structure</h2>
+        <p>The ZIP file contains HTML, JavaScript, and PHP files. After extracting the ZIP file you'll see the following
+            files & folders structure.</p>
+        <pre class="language-treeview line-numbers">
+                <code>
+                    docs.html
+                    form.html
+                    mailer/
+                    ├── contact.form.js
+                    ├── contact.form.php
+                    ├── validation.form.js
+                    ├── PHPMailer/
+                    |   ├── PHPMailer.php
+                    |   ├── Exception.php
+                    |   ├── SMTP.php
+                    |   ├── and more...
+                </code>
+            </pre>
+    </div>
+
+
+    <div class="container py-5">
+        <h2 class="fw-bold" id="setting-up">Setting Up</h2>
+        <p>The Contact Form is very easy to install and works with all templates designed by HTML Codex. Please follow the below instructions step by step.</p>
+        <p>1. Extract the "contact-form.zip" file. You will see the following files & folders structure.</p>
+        <pre class="language-treeview line-numbers mb-3">
+                <code>
+                    docs.html
+                    form.html
+                    mailer/
+                    ├── contact.form.js
+                    ├── contact.form.php
+                    ├── validation.form.js
+                    ├── PHPMailer/
+                    |   ├── PHPMailer.php
+                    |   ├── Exception.php
+                    |   ├── SMTP.php
+                    |   ├── and more...
+                </code>
+            </pre>
+        <p>2. Keep the "mailer" folder in the root directory. After placing the "mailer" folder in the root directory the structure will look like the example below.</p>
+        <pre class="language-treeview line-numbers mb-3">
+                <code>
+                    template/
+                    ├── css/
+                    ├── img/
+                    ├── js/
+                    ├── lib/
+                    ├── mailer/
+                    ├── index.html
+                    ├── contact.html
+                    ├── and more HTML files...
+                </code>
+            </pre>
+        <p>3. Copy the below HTML code for the contact form and paste it to your contact page where you want it.</p>
+        <pre class="language-html line-numbers mb-3">
+                <code><!--
+                    <div class="contact-form">
+                        <div id="alertMessage"></div>
+                        <form id="contactForm" novalidate="novalidate">
+                            <div class="row">
+                                <div class="col-sm-6 control-group">
+                                    <input type="text" class="form-control py-2" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="col-sm-6 control-group">
+                                    <input type="email" class="form-control py-2" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" />
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="col-sm-6 control-group">
+                                    <input type="text" class="form-control py-2" id="mobile" placeholder="Mobile" required="required" data-validation-required-message="Please enter your mobile number" pattern="^(?![-. ])[\d().+\- ]{6,14}\d$" data-validation-pattern-message="Not a valid mobile number" />
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="col-sm-6 control-group">
+                                    <input type="text" class="form-control py-2" id="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject" />
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="col-12 control-group">
+                                    <textarea class="form-control" rows="4" id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100 py-2" type="submit" id="sendMessageButton">
+                                        <span>Send Message</span>
+                                        <div class="d-none spinner-border spinner-border-sm text-light ms-3" role="status"></div>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                --></code>
+            </pre>
+        <body>4. Copy the JS files links code below and paste it into the footer area of your contact page (before the closing body tag).</p>
+        <pre class="language-html line-numbers mb-3">
+                <code>
+                    &lt;!-- Contact Form Javascript --&gt;
+                    &lt;script src="mailer/validation.form.js">&lt;/script>
+                    &lt;script src="mailer/contact.form.js">&lt;/script>
+                </code>
+            </pre>
+        <p>5. Copy the CSS code below and paste it into the header area of your contact page (before the closing head tag). Don't forget to save the file after making the changes.</p>
+        <pre class="language-html line-numbers mb-5">
+                <code>
+                    &lt;style type="text/css">
+                        #contactForm .help-block ul {
+                            margin: 0;
+                            padding: 0;
+                            list-style-type: none;
+                        }
+                    &lt;/style>
+                </code>
+            </pre>
+
+        <h2 class="fw-bold" id="activation">Activation</h2>
+        <p>Your Contact Form is now fully installed. Now you need to activate it to make it work. Follow the instructions below step by step.</p>
+        <p>1. Open the "contact.form.php" file from the "mailer" folder.</p>
+        <p>2. Change the recipient name and email address and save the file.</p>
+        <pre class="language-php line-numbers mb-3">
+                <code>
+                    // Recipient name. Change this name to your
+                    $recipientName = "Joe User";
+
+                    // Recipient email. Change this email to your
+                    $recipientEmail = "joe@example.com";
+                </code>
+            </pre>
+        <h5>Now your Contact Form is ready. Upload the template to the web host and test it. You should receive the test message in your email shortly.</h5>
+    </div>
+
+    <div class="container py-5">
+        <h2 class="fw-bold" id="smtp-settings">SMTP Settings</h2>
+        <p>The Contact Form utilizes the PHP mail() function as its default mailing method. However, it also includes a configuration for SMTP in case your hosting doesn't support the PHP mail() function for sending emails. If your hosting doesn't support the PHP mail() or you prefer to use the SMTP system, you'll need to enable it and add your SMTP credentials. Please follow the instructions below for guidance.</p>
+        <p>1. Open the "contact.form.php" file. Look for the word "useSMTP" and remove the word "false," then type in "true"
+            instead.</p>
+        <pre class="language-php line-numbers mb-3">
+                <code>
+                    // Set mailer to use SMTP or PHP's mail() function
+                    // If you use SMTP, it will be "true". Otherwise, it will be "false"
+                    $useSMTP = true;
+                </code>
+            </pre>
+        <p>2. You need to provide the following SMTP-related information. Don't forget to save the file after making the changes.</p>
+        <pre class="language-php line-numbers mb-3">
+            <code>
+                // Server settings for SMTP
+                $mail->isSMTP();
+                $mail->Host = 'smtp.example.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'user@example.com';
+                $mail->Password = 'secret';
+                $mail->SMTPSecure = 'tls';
+                $mail->Port = 587;
+            </code>
+        </pre>
+        <ul class="list-unstyled p-0 mb-5">
+            <li><b>Host:</b> The hostname or IP address of the SMTP server you want to use for sending emails.</li>
+            <li><b>Username:</b> The username or email address used to authenticate with the SMTP server.</li>
+            <li><b>Password:</b> The password associated with the SMTP username for authentication. Gmail may require an app password instead of your regular password.</li>
+            <li><b>SMTPSecure:</b> The encryption type to secure the connection between your script and the SMTP server. Common options are SSL, TLS, or none.</li>
+            <li><b>Port:</b> The port number used for the SMTP server. The default ports for secure SSL/TLS connections are 465 and 587. For non-secure connections, port 25 is often used.</li>
+        </ul>
+
+        <h2 class="fw-bold" id="mobile-settings">Mobile Number Settings</h2>
+        <p>By default, the mobile number field is enabled. If you prefer not to use the mobile field, you can simply remove it.</p>
+        <p>1. Open the "contact.html" file and remove the HTML code for mobile number field mentioned below.</p>
+        <pre class="language-html line-numbers mb-3">
+                <code><!--
+                    <div class="col-sm-6 control-group">
+                        <input type="text" class="form-control py-2" id="mobile" placeholder="Mobile" required="required" data-validation-required-message="Please enter your mobile number" pattern="^(?![-. ])[\d().+\- ]{6,14}\d$" data-validation-pattern-message="Not a valid mobile number" />
+                        <p class="help-block text-danger"></p>
+                    </div>
+                --></code>
+            </pre>
+        <p>2. Don't forget to change the CSS class for the subject field from "col-sm-6" to "col-12". See the below example.</p>
+        <pre class="language-html line-numbers mb-5">
+                <code><!--
+                    <div class="col-12 control-group">
+                        <input type="text" class="form-control py-2" id="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject" />
+                        <p class="help-block text-danger"></p>
+                    </div>
+                --></code>
+            </pre>
+
+        <h2 class="fw-bold" id="error-messages">Error Messages</h2>
+        <p>To customize the error messages, it's easy to do so. Just open your "contact.html" file, locate the "data-validation-required-message", and customize the error messages as desired.</p>
+        <pre class="language-html line-numbers">
+                <code><!--
+                    <input type="text" data-validation-required-message="Please enter your name" />
+                --></code>
+            </pre>
+    </div>
+
+    <div class="container py-5">
+        <h2 class="fw-bold" id="troubleshooting">Troubleshooting</h2>
+        <p>Although the Contact Form is 100% error-free, it may not work in some cases. If you face any problems while
+            using it, please find your solution in the FAQ below. Please <a href="https://htmlcodex.com/contact" target="_blank"><b>contact us</b></a> if no solution is found. Our team
+            will try to solve your problem within a short time.</p>
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Email could not be sent. What could be the issue?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        First, make sure that your Contact Form is set up correctly and that all the required fields are filled out. Next, check your email settings to make sure that you are using the correct recipient name and email address. If you use SMTP method then check the <a href="#smtp-settings">SMTP settings</a> are correctly configured.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        My server does not support PHP mail(). What should I do now?
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        If your server does not support the PHP mail() function, you still have an alternative option to enable email functionality on your website. You can use the SMTP method easily. Please see the instruction <a href="#smtp-settings">here</a> on how to configure the SMTP system.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        My server supports PHP mail() but, the email is not being sent. What could be the issue?
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <p>Even if your server supports the mail() function, there may be some reasons why the email is not being sent.</p>
+                        <ul>
+                            <li>Make sure that your Contact Form is set up correctly.</li>
+                            <li>Check your email settings to make sure that you are using the correct recipient name and email address.</li>
+                            <li>Some hosting providers don't allow external recipients when using PHP mail().</li>
+                            <li>Please change the recipient email address to an email address from the server's domain. For example, if your server domain is "www.yourdomain.com", then the recipient's email should be "someone@yourdomain.com".</li>
+                            <li>Please test the Contact Form with the same email as used for the recipient if not working.</li>
+                            <li>If it's still not working, you should use the SMTP method. Please see the instruction <a href="#smtp-settings">here</a> on how to configure the SMTP system.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFour">
+                    <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        The form submits, but I'm not receiving any emails. What could be the issue?
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <p>There are a few potential reasons.</p>
+                        <ul>
+                            <li>Ensure that your server supports the mail() function or that SMTP settings are correctly configured.</li>
+                            <li>Double-check your SMTP configuration (server, port, username, password, encryption) and verify that the email addresses are valid.</li>
+                            <li>Check your spam folder in case emails are getting flagged as spam by your email provider.</li>
+                            <li>Firewall or Antivirus Blocking: In some cases, firewalls or antivirus software might be blocking the outgoing emails. Verify if there are any security programs causing interference and adjust their settings if needed.</li>
+                            <li>IP Address Blocking: If there were previous unethical behaviors from the IP address, the server might have temporarily blocked the IP for security reasons. In this case, waiting for a while and trying again might resolve the issue.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFive">
+                    <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        Email could not be sent. SMTP Error: Could not authenticate. What could be the issue?
+                    </button>
+                </h2>
+                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <p>The error message "SMTP Error: Could not authenticate" indicates that there was a problem with the authentication process while attempting to send an email through the Simple Mail Transfer Protocol (SMTP). There are a few possible reasons for this issue:</p>
+                        <ul>
+                            <li>Incorrect Username or Password: The most common reason for this error is that the username and/or password used for authentication are incorrect. Double-check the login credentials you are using to ensure they are accurate.</li>
+                            <li>Authentication Method: SMTP servers often support different authentication methods, such as plain text, encrypted (SSL/TLS), or secure methods like OAuth. Ensure that you are using the correct authentication method as required by the SMTP server you are connecting to.</li>
+                            <li>Firewall or Antivirus Blocking: In some cases, firewalls or antivirus software might be blocking the outgoing connection to the SMTP server, leading to authentication failure. Verify if there are any security programs causing interference and adjust their settings if needed.</li>
+                            <li>SMTP Server Configuration: The issue might be on the server-side. Check if the SMTP server settings, including the server address, port number, and encryption method, are set up correctly.</li>
+                            <li>Account Access: Ensure that the account you are trying to use for authentication has the necessary permissions to send emails via the SMTP server.</li>
+                            <li>IP Address Blocking: If there were previous failed login attempts from the same IP address, the SMTP server might have temporarily blocked the IP for security reasons. In this case, waiting for a while and trying again might resolve the issue.</li>
+                            <li>Two-Factor Authentication (2FA): If the email service provider or server enforces 2FA, you may need to generate an app-specific password or provide additional authentication credentials.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingSix">
+                    <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                        Do I need an app password for Gmail SMTP configuration?
+                    </button>
+                </h2>
+                <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        An App password is a 16-digit passcode that gives an app or device permission to access your Google Account. If you use 2-Step Verification and are seeing a "password incorrect" or "Cannot connect to SMTP Server" error when trying to access your Google Account, an App password may solve the problem.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingSeven">
+                    <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                        How to create an app password on my Google Account?
+                    </button>
+                </h2>
+                <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <p>To create an app password, you need 2-Step Verification on your Google Account. Here's a step-by-step guide to generate an app password for Gmail:</p>
+                        <h6>Enable Two-Step Verification:</h6>
+                        <ul>
+                            <li>Go to your Google Account settings (https://myaccount.google.com/).</li>
+                            <li>Navigate to the "Security" section.</li>
+                            <li>Under the "Signing in to Google" section, click on "2-Step Verification."</li>
+                            <li>Follow the prompts to enable two-step verification for your Google account.</li>
+                        </ul>
+                        <h6>Generate App Password:</h6>
+                        <ul>
+                            <li>After enabling two-step verification, go back to the "Security" section in your Google Account settings.</li>
+                            <li>Look for the "Signing in to Google" section again, and this time click on "App passwords."</li>
+                            <li>You might be prompted to enter your Google account password again.</li>
+                            <li>In the "Select app" dropdown, choose "mailer" (or "Other (Custom name)") if the "mailer" option is not available.</li>
+                            <li>In the "Select device" dropdown, choose "Other (Custom name)."</li>
+                            <li>Enter a custom name for your app password (e.g., "Contact Form").</li>
+                            <li>Click on the "Generate" button.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid bg-primary text-center py-4 mt-5">
+        <h5 class="text-white mb-3">Thank you for using our Ajax & PHP Contact Form.</h5>
+        <p class="text-white mb-0">Copyright &copy; <a class="text-white border-bottom" href="https://htmlcodex.com">HTML Codex</a>, All Rights Reserved.</p>
+    </div>
+
+    <!-- Back to Top -->
+    <a href="#top" class="btn btn-primary fs-4 py-1 back-to-top">&uarr;</a>
+
+    <!-- Libraries JavaScript -->
+    <script src="js/jquery-3.7.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/prism.min.js"></script>
+
+    <!-- Docs Javascript -->
+    <script src="js/docs.js"></script>
+
+    <!-- Contact Form Javascript -->
+    <script src="mailer/validation.form.js"></script>
+    <script src="mailer/contact.form.js"></script>
+</body>
+
+</html>
