@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Student Login - My School{% endblock %}
+{% block content %}
+  <h2>Student Login</h2>
+  {% if error %}<p class="error">{{ error }}</p>{% endif %}
+  <form method="POST">
+    <label>Username</label>
+    <input name="username" required>
+    <label>Password</label>
+    <input name="password" type="password" required>
+    <button type="submit">Login</button>
+  </form>
+{% endblock %}

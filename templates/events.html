@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Events - My School{% endblock %}
+{% block content %}
+  <h2>Upcoming Events</h2>
+  {% if events %}
+    <ul>
+      {% for e in events %}
+        <li>
+          <strong>{{ e[1] }}</strong> — {{ e[2] }}<br>
+          <small>{{ e[3] }}</small>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No events yet.</p>
+  {% endif %}
+{% endblock %}

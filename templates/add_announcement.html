@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Add Announcement - My School{% endblock %}
+{% block content %}
+  <h2>Add Announcement</h2>
+  <form method="POST">
+    <label>Message</label>
+    <textarea name="message" required></textarea>
+    <button type="submit">Create</button>
+  </form>
+{% endblock %}

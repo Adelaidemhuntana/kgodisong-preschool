@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard - My School{% endblock %}
+{% block content %}
+  <h2>Welcome, {{ student.student_name or student.student_username }}</h2>
+  <p>Grade: {{ student.student_grade }}</p>
+  <p><a href="{{ url_for('student_logout') }}">Logout</a></p>
+{% endblock %}

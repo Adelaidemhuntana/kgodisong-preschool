@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Teachers - My School{% endblock %}
+{% block content %}
+  <h2>Our Teachers</h2>
+  {% if teachers %}
+    <ul>
+      {% for t in teachers %}
+        <li><strong>{{ t[1] }}</strong> — {{ t[2] }} <br><small>{{ t[3] }}</small></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No teacher data.</p>
+  {% endif %}
+{% endblock %}
