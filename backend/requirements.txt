@@ -1,0 +1,13 @@
+Flask
+Flask-Cors
+python-dotenv
+openai
+llama-index
+llama-index-core
+llama-index-llms-openai-like
+llama-index-embeddings-huggingface
+chromadb
+SQLAlchemy
+requests
+pydantic
+validators
