@@ -3,33 +3,40 @@ import datetime
 
 class view_data:
     def __init__(self, db_path="database.db"):
-         self.db = sqlite3.connect(db_path)
-         self.cursor = self.db.cursor()
-
+        self.db = sqlite3.connect(db_path)
+        self.cursor = self.db.cursor()
+        
     def get_parents(self):
         self.cursor.execute("SELECT * FROM Parents")
         rows = self.cursor.fetchall()
-        print(rows)
+        for row in rows:
+            print(row)
 
     def get_children(self):
-        self.cursor.execute("SELECT * FROM Children")
+        self.cursor.execute("""SELECT c.First_name,c.surname,c.date_of_birth,c.School,c.Grade,c.Class, p.First_name 
+                            FROM Children c 
+                            join Parents p on p.Parent_id_number = c.Parent_id""")
         rows = self.cursor.fetchall()
-        print(rows)
+        for row in rows:
+            print(row)
 
     def get_teachers(self):
         self.cursor.execute("SELECT * FROM Teachers")
         rows = self.cursor.fetchall()
-        print(rows)
+        for row in rows:
+            print(row)
 
     def get_bookings(self):
         self.cursor.execute("SELECT * FROM Bookings")
         rows = self.cursor.fetchall()
-        print(rows)
+        for row in rows:
+            print(row)
 
     def get_absence_logs(self):
         self.cursor.execute("SELECT * FROM Absence_logs")
         rows = self.cursor.fetchall()
-        print(rows)
+        for row in rows:
+            print(row)
 
 
 
