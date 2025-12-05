@@ -29,9 +29,9 @@ book = Bookings()
 types = Booking_types()
 
 #adding
-# teacher.add_teacher(teachers)
-# parent.add_parent(parents)
-#child.add_child(child_list)
+# teacher.add_teacher(teachers_list)
+# parent.add_parent(parents_list)
+# child.add_child(child_list)
 
 #removing
 # teacher.remove_teacher(123)
@@ -41,8 +41,8 @@ types = Booking_types()
 
 
 #logging absence
-#absence.log_absence(124,"2020","sick",111)
-#absence.view_absence_history(124)
+#absence.log_absence(144,"2020","sick",111)
+# absence.view_absence_history(124)
 
 # book.create_booking(123,1,"2020-07-09")
 # book.cancel_booking(123,"2020-07-09")
