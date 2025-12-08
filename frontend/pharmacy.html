@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy - Kgodisong Preschool</title>
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #fff0f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background: #fd85c1;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            font-size: 28px;
+            font-weight: bold;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .medicine-card {
+            background: white;
+            padding: 18px;
+            border-radius: 18px;
+            box-shadow: 0 0 10px rgba(214, 51, 132, 0.2);
+            margin-bottom: 20px;
+            border-left: 6px solid #fa52a6;
+        }
+
+        h3 {
+            margin: 0;
+            color: #f668af;
+        }
+
+        p {
+            color: #444;
+            margin-top: 5px;
+        }
+
+        .btn {
+            background: #fe7ebe;
+            color: white;
+            padding: 12px;
+            font-size: 15px;
+            border: none;
+            width: 100%;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #fa429b;
+        }
+
+        .success {
+            display: none;
+            padding: 15px;
+            background: #ffe2f0;
+            border-left: 6px solid #d63384;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            color: gray;
+            margin-top: 20px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        💊 Preschool Pharmacy Desk
+    </div>
+
+    <div class="container">
+
+        <!-- Medicine cards -->
+        <div class="medicine-card">
+            <h3>Children's Pain Syrup</h3>
+            <p>For mild fever, flu, and headaches. Suitable for ages 3–7.</p>
+            <button class="btn" onclick="order('Children Pain Syrup')">Order</button>
+        </div>
+
+        <div class="medicine-card">
+            <h3>Allergy Relief Drops</h3>
+            <p>Helps with sneezing, itchy eyes, and seasonal allergies.</p>
+            <button class="btn" onclick="order('Allergy Relief Drops')">Order</button>
+        </div>
+
+        <div class="medicine-card">
+            <h3>Vitamin Gummies</h3>
+            <p>Daily immune-boosting vitamins for preschoolers.</p>
+            <button class="btn" onclick="order('Vitamin Gummies')">Order</button>
+        </div>
+
+        <div id="successMessage" class="success"></div>
+
+        <div class="footer">
+            Kgodisong Preschool
+        </div>
+    </div>
+
+    <script>
+        function order(item) {
+            const message = document.getElementById("successMessage");
+            message.style.display = "block";
+            message.innerHTML = "🎉 Order placed for: <b>" + item + "</b>. We will notify you when it’s ready!";
+        }
+    </script>
+
+</body>
+
+</html>

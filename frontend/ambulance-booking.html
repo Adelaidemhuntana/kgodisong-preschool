@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambulance Booking - Kgodisong Preschool</title>
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #fff0f7;
+            margin: 0;
+        }
+
+        .header {
+            background: #fd85c1;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            font-size: 28px;
+            font-weight: bold;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 18px;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(214, 51, 132, 0.2);
+            border-left: 6px solid #d63384;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #fa53a7;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px solid #f5c1da;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        .btn {
+            background: #ff60af;
+            color: white;
+            padding: 14px;
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #fc52a4;
+        }
+
+        .success {
+            display: none;
+            background: #ffe2f0;
+            padding: 15px;
+            border-radius: 12px;
+            border-left: 6px solid #f75aa8;
+            margin-top: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            color: gray;
+            font-size: 13px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        🚑 Emergency Ambulance Request
+    </div>
+
+    <div class="container">
+
+        <div class="card">
+            <label>Child's Full Name</label>
+            <input type="text" id="childName" placeholder="Enter child's name">
+
+            <label>Class / Grade</label>
+            <input type="text" id="className" placeholder="E.g. Grade R, Baby Class">
+
+            <label>Type of Emergency</label>
+            <select id="emergencyType">
+                <option value="">-- select emergency --</option>
+                <option>High Fever</option>
+                <option>Breathing Problems</option>
+                <option>Seizures</option>
+                <option>Severe Injury</option>
+                <option>Allergic Reaction</option>
+                <option>Other</option>
+            </select>
+
+            <label>Describe What Happened</label>
+            <textarea id="description" placeholder="Give a short explanation..."></textarea>
+
+            <button class="btn" onclick="submitForm()">Request Ambulance</button>
+
+            <div id="successBox" class="success"></div>
+        </div>
+
+        <div class="footer">
+            Kgodisong Preschool
+        </div>
+
+    </div>
+
+    <script>
+        function submitForm() {
+            const name = document.getElementById('childName').value;
+            const className = document.getElementById('className').value;
+            const emergency = document.getElementById('emergencyType').value;
+            const desc = document.getElementById('description').value;
+            const box = document.getElementById('successBox');
+
+            if (!name || !className || !emergency || !desc) {
+                alert("Please fill in ALL fields.");
+                return;
+            }
+
+            box.style.display = "block";
+            box.innerHTML = `
+                🚑 <b>Ambulance Requested!</b><br><br>
+                Child: <b>${name}</b><br>
+                Class: <b>${className}</b><br>
+                Emergency: <b>${emergency}</b><br><br>
+                We will contact the nearest EMS immediately. 
+            `;
+        }
+    </script>
+
+</body>
+
+</html>

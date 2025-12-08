@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Kgodisong Health Hub Login</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <!-- Bootstrap + ThemeWagon Styles -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #ffdaf1; /* Soft pink matching your template */
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .login-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .btn-pink {
+            background: #ff4fa1;
+            color: #fff;
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-weight: 600;
+        }
+
+        .btn-pink:hover {
+            background: #fa268d;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container d-flex justify-content-center align-items-center" style="height:100vh;">
+        <div class="col-md-5 login-card">
+            <h2 class="text-center mb-4" style="color:#ff238c;">Kgodisong Health Hub</h2>
+            <p class="text-center mb-4 text-muted">Login to access the Health Hub</p>
+
+            <form id="loginForm">
+
+                <div class="form-group mb-3">
+                    <label>Email</label>
+                    <input type="email" id="email" class="form-control p-3" placeholder="Enter email" required>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label>Password</label>
+                    <input type="password" id="password" class="form-control p-3" placeholder="Enter password" required>
+                </div>
+
+                <button class="btn btn-pink w-100 mt-3" type="submit">Login</button>
+            </form>
+
+            <small class="d-block text-center text-muted mt-3">
+                Only authorized parents & teachers may log in.
+            </small>
+        </div>
+    </div>
+
+    <!-- Login Script -->
+    <script>
+        const loginForm = document.getElementById('loginForm');
+
+        loginForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Allowed demo users
+            const validUsers = ['parent@kgodisong.com', 'teacher@kgodisong.com'];
+
+            if (validUsers.includes(email) && password === '123456') {
+                // Store login state
+                localStorage.setItem('loggedIn', 'true');
+
+                // Redirect to hub dashboard
+                window.location.href = "hub-dashboard.html";
+            } else {
+                alert("Invalid login credentials");
+            }
+        });
+    </script>
+
+</body>
+</html>

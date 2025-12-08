@@ -680,3 +680,64 @@ h6,
     color: var(--bs-secondary) !important;
 }
 /*** Footer End ***/
+ /* -------------------------
+   MINNIE MOUSE PINK THEME
+   ------------------------- */
+
+:root {
+    --pink-main: #d63384;
+    --pink-light: #f7b3d1;
+    --pink-lighter: #fde6f1;
+    --pink-dark: #b0226c;
+}
+
+body {
+    background-color: #fff5fa;
+    font-family: "Poppins", sans-serif;
+}
+
+.card {
+    border-radius: 20px !important;
+    border: none !important;
+    background: #ffffff;
+    box-shadow: 0px 4px 12px rgba(214, 51, 132, 0.2);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(214, 51, 132, 0.28);
+}
+
+.btn-pink {
+    background-color: var(--pink-main) !important;
+    border-radius: 30px !important;
+    color: white !important;
+    padding: 12px 25px !important;
+}
+
+.btn-outline-pink {
+    border: 2px solid var(--pink-main) !important;
+    color: var(--pink-main) !important;
+    border-radius: 30px !important;
+}
+
+.btn-outline-pink:hover {
+    background: var(--pink-main) !important;
+    color: white !important;
+}
+
+.page-title {
+    color: var(--pink-main);
+    font-weight: 700;
+}
+
+input, select, textarea {
+    border-radius: 12px !important;
+    border: 1px solid var(--pink-light) !important;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--pink-main) !important;
+    box-shadow: 0 0 0 0.2rem rgba(214, 51, 132, 0.25) !important;
+}

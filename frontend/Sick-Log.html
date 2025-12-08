@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Sick Absenteeism | Kgodisong Health Hub</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <!-- Bootstrap & CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- Redirect if not logged in
+<script>
+    if (!localStorage.getItem('loggedIn')) {
+        window.location.href = "login.html";
+    }
+</script> -->
+
+<div class="container py-5">
+    <h1 class="page-title text-center mb-4">Sick Absenteeism</h1>
+    <p class="text-center mb-5">Log a child’s illness so the school can take action immediately</p>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+
+            <div class="card p-4 shadow-lg">
+
+                <form id="sickForm">
+
+                    <div class="mb-3">
+                        <label class="form-label">Child Name</label>
+                        <input type="text" class="form-control" placeholder="Enter child's full name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Grade / Class</label>
+                        <input type="text" class="form-control" placeholder="e.g. Grade R – Minnie Class" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Symptoms</label>
+                        <select class="form-control" required>
+                            <option value="">-- Select symptom --</option>
+                            <option>Fever</option>
+                            <option>Cough</option>
+                            <option>Flu-like symptoms</option>
+                            <option>Diarrhea</option>
+                            <option>Vomiting</option>
+                            <option>Headache</option>
+                            <option>Skin rash</option>
+                            <option>Allergy</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Describe the Illness</label>
+                        <textarea class="form-control" rows="4" placeholder="Provide more details…" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Date of Absence</label>
+                        <input type="date" class="form-control" required>
+                    </div>
+
+                    <div class="d-grid">
+                        <button class="btn btn-pink btn-lg" type="submit">Submit Sick Report</button>
+                    </div>
+                </form>
+
+                <p id="successMessage" class="text-center text-success mt-4" style="display:none;">
+                    ✔ Sick report logged successfully!  
+                    The school will review and take action.
+                </p>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    document.getElementById('sickForm').addEventListener('submit', function(e){
+        e.preventDefault();
+
+        // Backend will replace this
+        document.getElementById('successMessage').style.display = 'block';
+
+        console.log("SICK REPORT SENT TO BACKEND");
+    });
+</script>
+
+</body>
+</html>
