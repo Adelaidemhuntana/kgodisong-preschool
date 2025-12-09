@@ -1,0 +1,75 @@
+ body {
+            font-family: "Poppins", sans-serif;
+            background: #fff0f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background: #fd85c1;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            font-size: 28px;
+            font-weight: bold;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .medicine-card {
+            background: white;
+            padding: 18px;
+            border-radius: 18px;
+            box-shadow: 0 0 10px rgba(214, 51, 132, 0.2);
+            margin-bottom: 20px;
+            border-left: 6px solid #fa52a6;
+        }
+
+        h3 {
+            margin: 0;
+            color: #f668af;
+        }
+
+        p {
+            color: #444;
+            margin-top: 5px;
+        }
+
+        .btn {
+            background: #fe7ebe;
+            color: white;
+            padding: 12px;
+            font-size: 15px;
+            border: none;
+            width: 100%;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #fa429b;
+        }
+
+        .success {
+            display: none;
+            padding: 15px;
+            background: #ffe2f0;
+            border-left: 6px solid  #fd96ca;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            color: gray;
+            margin-top: 20px;
+            font-size: 13px;
+        } 
