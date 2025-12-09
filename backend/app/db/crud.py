@@ -1,8 +1,14 @@
+import os.path
 import sqlite3
 import datetime
 
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_FOLDER = os.path.join(BASE_DIR)
+db_path = os.path.join(DB_FOLDER, "database.db")
+
 class view_data:
-    def __init__(self, db_path="database.db"):
+    def __init__(self):
         self.db = sqlite3.connect(db_path)
         self.cursor = self.db.cursor()
         
@@ -42,7 +48,7 @@ class view_data:
 
 
 class Children:
-    def __init__(self, db_path="database.db"):
+    def __init__(self):
          self.db = sqlite3.connect(db_path)
          self.cursor = self.db.cursor()
 
@@ -65,7 +71,7 @@ class Children:
         pass
 
 class Teacher:
-    def __init__(self, db_path="database.db"):
+    def __init__(self):
         self.db = sqlite3.connect(db_path)
         self.cursor = self.db.cursor()
 
@@ -86,7 +92,7 @@ class Teacher:
         pass
 
 class Parent:
-    def __init__(self, db_path="database.db"):
+    def __init__(self):
         self.db = sqlite3.connect(db_path)
         self.cursor = self.db.cursor()
 
@@ -108,7 +114,7 @@ class Parent:
 
 
 class Bookings:
-    def __init__(self, db_path="database.db"):
+    def __init__(self):
         self.db = sqlite3.connect(db_path)
         self.cursor = self.db.cursor()
 
@@ -125,7 +131,7 @@ class Bookings:
         self.db.commit()
         
 class Absence_log():
-    def __init__(self, db_path="database.db"):
+    def __init__(self):
         self.db = sqlite3.connect(db_path)
         self.cursor = self.db.cursor()
 
@@ -147,7 +153,7 @@ class Absence_log():
     
 
 class Booking_types:
-    def __init__(self, db_path="database.db"):
+    def __init__(self):
         self.db = sqlite3.connect(db_path)
         self.cursor = self.db.cursor()
 

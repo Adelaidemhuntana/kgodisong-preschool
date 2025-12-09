@@ -1,6 +1,11 @@
 import sqlite3
+import os.path
 
-db = sqlite3.connect("database.db")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_FOLDER = os.path.join(BASE_DIR)
+db_path = os.path.join(DB_FOLDER, "database.db")
+
+db = sqlite3.connect(db_path)
 cursor = db.cursor()
 
 # children table

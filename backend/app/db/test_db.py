@@ -18,7 +18,7 @@ teachers_list = [
     (868, "John", "Nkosi", "john.nkosi@example.com")
 ]
 Booking_types_list = [("Dental",),("Eye Test",)]
-#adding parents
+# adding parents
 # adding teachers
 # adding children
 parent = Parent()
@@ -50,15 +50,15 @@ types = Booking_types()
 
 # types.add_booking_types(Booking_types_list)
 
-# data = view_data()
+data = view_data()
 # print("absent logs")
 # data.get_absence_logs()
 # print()
 # print("bookings")
 # data.get_bookings()
 # print()
-# print("Children")
-# data.get_children()
+print("Children")
+data.get_children()
 # print()
 # print("parents")
 # data.get_parents()
