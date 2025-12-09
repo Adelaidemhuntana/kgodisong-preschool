@@ -741,3 +741,22 @@ input:focus, select:focus, textarea:focus {
     border-color: var(--pink-main) !important;
     box-shadow: 0 0 0 0.2rem rgba(214, 51, 132, 0.25) !important;
 }
+
+/* Chatbot floating icon */
+.chatbot-launch {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.chatbot-icon {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.chatbot-icon:hover {
+    transform: scale(1.1);
+}
