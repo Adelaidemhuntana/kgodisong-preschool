@@ -1,0 +1,24 @@
+ body {
+            background: #ffdaf1; /* Soft pink matching your template */
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .login-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .btn-pink {
+            background:  #fd96ca;
+            color: #fff;
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-weight: 600;
+        }
+
+        .btn-pink:hover {
+            background:  #fd96ca;
+            color: #fff;
+        }

@@ -1,0 +1,27 @@
+/* Pink curved hub cards */
+        .hub-card {
+            background: #ffffff;
+            border: 3px solid #f187bc;
+            border-radius: 50% 20% / 10% 40%;
+            padding: 30px;
+            text-align: center;
+            color: #333;
+            transition: 0.3s ease-in-out;
+        }
+
+        .hub-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 18px rgba(214, 51, 132, 0.25);
+        }
+
+        .hub-title {
+            color: #f187bc;
+            font-weight: bold;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .hub-text {
+            color: #555;
+            font-size: 15px;
+        }
