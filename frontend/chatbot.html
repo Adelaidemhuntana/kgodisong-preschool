@@ -133,7 +133,7 @@
             messages.scrollTop = messages.scrollHeight;
         }
 
-        function sendMessage() {
+        async function sendMessage() {
             const input = document.getElementById("userInput");
             const text = input.value.trim();
 
@@ -142,18 +142,54 @@
             // user bubble
             addMessage(text, "user");
 
-            // clear box
+            // clear input
             input.value = "";
 
-            // TEMPORARY BOT RESPONSE (your backend team will replace with API)
-            setTimeout(() => {
-                addMessage("💡 I'm here to help! Your question has been sent to Ilama AI for child-safe guidance.", "bot");
-            }, 500);
+            // show typing bubble
+            const typingBubble = document.createElement("div");
+            typingBubble.classList.add("bubble", "bot");
+            typingBubble.innerHTML = "⏳ Thinking…";
+            messages.appendChild(typingBubble);
+            messages.scrollTop = messages.scrollHeight;
+
+            // SEND REQUEST TO BACKEND /ask-ai
+            try {
+                const res = await fetch("http://127.0.0.1:5000/ask-ai", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        question: text,
+                        category: "General",
+                        age: 4
+                    })
+                });
+
+                const data = await res.json();
+
+                // remove typing bubble
+                typingBubble.remove();
+
+                // Add AI response
+                addMessage(data.answer, "bot");
+
+            } catch (error) {
+                console.error("Error:", error);
+                typingBubble.remove();
+                addMessage("❗ Sorry, I couldn't reach the AI service. Please try again.", "bot");
+            }
         }
 
+        // ENTER KEY SUPPORT
+        document.getElementById("userInput").addEventListener("keypress", function(e) {
+            if (e.key === "Enter") sendMessage();
+        });
+
         // Initial greeting
-        addMessage("Hello!  I'm Ilama, your child-safe health assistant. How can I help today?", "bot");
+        addMessage("Hello! I'm Ilama, your child-safe health assistant. How can I help today?", "bot");
     </script>
+
 
 </body>
 
