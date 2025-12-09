@@ -4,12 +4,7 @@ python-dotenv
 
 groq
 
-llama-index
-llama-index-core
-llama-index-llms-groq
-llama-index-embeddings-huggingface
-
-chromadb
+gunicorn
 
 SQLAlchemy
 pydantic
