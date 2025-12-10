@@ -1,94 +1,107 @@
-    
-       body  {
-            font-family: "Poppins", sans-serif;
-            background: #fff0f7;
-            margin: 0;
-        }
+body  {
+    font-family: "Poppins", sans-serif;
 
-        .header {
-            background: #fd96ca;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            font-size: 28px;
-            font-weight: bold;
-            border-bottom-left-radius: 30px;
-            border-bottom-right-radius: 30px;
-        }
+    /*  NEW — Background image */
+    background: url("../img/Medical-theme.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 
-        .chat-container {
-            max-width: 650px;
-            margin: 20px auto;
-            padding: 20px;
-            background: white;
-            border-radius: 18px;
-            box-shadow: 0 0 10px rgba(214, 51, 132, 0.2);
-            border-left: 6px solid #fc7dbd;
-        }
+    margin: 0;
+}
 
-        .messages {
-            height: 400px;
-            overflow-y: auto;
-            padding: 15px;
-            border-radius: 12px;
-            background: #ffe6f2;
-            border: 2px solid #f5c1da;
-        }
+.header {
+    background: #fd96ca;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
 
-        .bubble {
-            padding: 12px 15px;
-            border-radius: 15px;
-            margin-bottom: 12px;
-            max-width: 80%;
-            line-height: 1.4;
-            font-size: 15px;
-        }
+.chat-container {
+    max-width: 650px;
+    margin: 20px auto;
+    padding: 20px;
 
-        .user {
-            background:#fd96ca;
-            color: white;
-            margin-left: auto;
-            border-bottom-right-radius: 3px;
-        }
+    /*  NEW — translucent glass effect */
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(4px);
 
-        .bot {
-            background: white;
-            color: #fd85c1;
-            border: 2px solid #f5c1da;
-            border-bottom-left-radius: 3px;
-        }
+    border-radius: 18px;
+    box-shadow: 0 0 10px rgba(214, 51, 132, 0.2);
+    border-left: 6px solid #fc7dbd;
+}
 
-        .input-box {
-            display: flex;
-            margin-top: 15px;
-        }
+.messages {
+    height: 400px;
+    overflow-y: auto;
+    padding: 15px;
+    border-radius: 12px;
 
-        input {
-            flex: 1;
-            padding: 12px;
-            border-radius: 10px;
-            border: 2px solid #f5c1da;
-            font-size: 15px;
-        }
+    /*  NEW — translucent messages background */
+    background: rgba(255, 230, 242, 0.65);
+    backdrop-filter: blur(3px);
 
-        button {
-            padding: 12px 18px;
-            background: #fa6fb4;
-            border: none;
-            margin-left: 10px;
-            color: white;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+    border: 2px solid #f5c1da;
+}
 
-        button:hover {
-            background: #fa81bd;
-        }
+.bubble {
+    padding: 12px 15px;
+    border-radius: 15px;
+    margin-bottom: 12px;
+    max-width: 80%;
+    line-height: 1.4;
+    font-size: 15px;
+}
 
-        .footer {
-            text-align: center;
-            color: gray;
-            font-size: 13px;
-            margin-top: 20px;
-        } 
+.user {
+    background:#fd96ca;
+    color: white;
+    margin-left: auto;
+    border-bottom-right-radius: 3px;
+}
+
+.bot {
+    background: white;
+    color: #fd85c1;
+    border: 2px solid #f5c1da;
+    border-bottom-left-radius: 3px;
+}
+
+.input-box {
+    display: flex;
+    margin-top: 15px;
+}
+
+input {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    border: 2px solid #f5c1da;
+    font-size: 15px;
+}
+
+button {
+    padding: 12px 18px;
+    background: #fa6fb4;
+    border: none;
+    margin-left: 10px;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #fa81bd;
+}
+
+.footer {
+    text-align: center;
+    color: gray;
+    font-size: 13px;
+    margin-top: 20px;
+}
