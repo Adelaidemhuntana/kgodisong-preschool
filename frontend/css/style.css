@@ -760,3 +760,36 @@ input:focus, select:focus, textarea:focus {
 .chatbot-icon:hover {
     transform: scale(1.1);
 }
+
+.emergency-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.emergency-menu {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    background: #fff;
+    padding: 15px 20px;
+    border-radius: 12px;
+    width: 240px;
+    border-left: 4px solid #fd96ca;
+    border-right: 4px solid #fd96ca;
+    z-index: 9999;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.emergency-menu a {
+    display: block;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 8px 0;
+    color: #d63384;
+    text-decoration: none;
+}
+
+.emergency-menu a:hover {
+    text-decoration: underline;
+}

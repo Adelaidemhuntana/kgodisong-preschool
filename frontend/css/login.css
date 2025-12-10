@@ -1,24 +1,44 @@
- body {
-            background: #ffdaf1; /* Soft pink matching your template */
-            font-family: 'Poppins', sans-serif;
-        }
+body {
+    background: url('../img/Medical-theme.png') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
+}
 
-        .login-card {
-            background: #fff;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
-        }
+.login-card {
+    background: rgba(255, 255, 255, 0.9); /* semi-transparent so text is readable */
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
+}
 
-        .btn-pink {
-            background:  #fd96ca;
-            color: #fff;
-            border-radius: 30px;
-            padding: 10px 20px;
-            font-weight: 600;
-        }
+.btn-pink {
+    background:  #fd96ca;
+    color: #fff;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-weight: 600;
+}
 
-        .btn-pink:hover {
-            background:  #fd96ca;
-            color: #fff;
-        }
+.btn-pink:hover {
+    background:  #fd96ca;
+    color: #fff;
+}
+
+.tab-link {
+    cursor: pointer;
+    font-weight: bold;
+    color: #fd96ca;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.tab-link:hover {
+    background: #fd96ca;
+    color: white;
+}
+
+.tab-link.active {
+    background: #fd96ca;
+    color: white;
+}

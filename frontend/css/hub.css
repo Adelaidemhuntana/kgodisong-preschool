@@ -1,27 +1,36 @@
-/* Pink curved hub cards */
-        .hub-card {
-            background: #ffffff;
-            border: 3px solid #f187bc;
-            border-radius: 50% 20% / 10% 40%;
-            padding: 30px;
-            text-align: center;
-            color: #333;
-            transition: 0.3s ease-in-out;
-        }
+/* Page background */
+body {
+    background: url('img/Medical-theme.png') no-repeat center center fixed;
+    background-size: cover; /* makes the image cover the entire viewport */
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
 
-        .hub-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 18px rgba(214, 51, 132, 0.25);
-        }
+/* Hub cards */
+.hub-card {
+    background: rgba(255, 255, 255, 0.95); /* slightly transparent so background shows subtly */
+    border: 3px solid #f187bc;
+    border-radius: 50% 20% / 10% 40%;
+    padding: 30px;
+    text-align: center;
+    color: #333;
+    transition: 0.3s ease-in-out;
+}
 
-        .hub-title {
-            color: #f187bc;
-            font-weight: bold;
-            font-size: 22px;
-            margin-bottom: 10px;
-        }
+.hub-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 18px rgba(214, 51, 132, 0.25);
+}
 
-        .hub-text {
-            color: #555;
-            font-size: 15px;
-        }
+.hub-title {
+    color: #f187bc;
+    font-weight: bold;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.hub-text {
+    color: #555;
+    font-size: 15px;
+}

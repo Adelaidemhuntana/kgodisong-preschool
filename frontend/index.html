@@ -90,22 +90,38 @@
     </div>
 </div>
 
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
-                        </div>
-                        <div class="d-flex me-4">
-                            <div id="phone-tada" class="d-flex align-items-center justify-content-center">
-                                <a href="" class="position-relative wow tada" data-wow-delay=".9s" >
-                                    <i class="fa fa-phone-alt text-primary fa-2x me-4"></i>
-                                    <div class="position-absolute" style="top: -7px; left: 20px;">
-                                        <span><i class="fa fa-comment-dots text-secondary"></i></span>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="d-flex flex-column pe-3 border-end border-primary">
-                                <span class="text-primary">Have any questions?</span>
-                                <a href="#"><span class="text-secondary">072 229 7286</span></a>
-                            </div>
-                        </div>
+                         <a href="contact.html" class="nav-item nav-link">Contact</a>
+</div>
+
+<div class="emergency-wrapper position-relative">
+    <div class="d-flex me-4">
+        <div id="phone-tada" class="d-flex align-items-center justify-content-center">
+            <a href="javascript:void(0)" class="position-relative wow tada" data-wow-delay=".9s">
+                <i class="fa fa-phone-alt text-primary fa-2x me-4"></i>
+
+                <div class="position-absolute" style="top: -7px; left: 20px;">
+                    <span><i class="fa fa-comment-dots text-secondary"></i></span>
+                </div>
+            </a>
+        </div>
+
+        <div class="d-flex flex-column pe-3 border-end border-primary">
+            <span class="text-primary">Emergency Services</span>
+            <a href="#"><span class="text-secondary">Click the icon</span></a>
+        </div>
+    </div>
+
+    <!-- EMERGENCY POPUP MENU -->
+    <div id="emergency-menu" class="emergency-menu shadow">
+        <h5 class="mb-2">Emergency Contacts</h5>
+        <a href="tel:084124"><i class="fa fa-ambulance me-2"></i> ER24 — 084 124</a>
+        <a href="tel:082911"><i class="fa fa-plus-square me-2"></i> Netcare 911 — 082 911</a>
+        <a href="tel:10177"><i class="fa fa-phone me-2"></i> Ambulance (Public EMS) — 10177</a>
+        <a href="tel:112"><i class="fa fa-mobile-alt me-2"></i> Cellphone Emergency — 112</a>
+    </div>
+</div>
+
+
                         <button class="btn-search btn btn-primary btn-md-square rounded-circle" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-white"></i></button>
                     </div>
                 </nav>
@@ -850,6 +866,39 @@
     <img src="img/chatbot-icon.png" alt="AI Chatbot" class="chatbot-icon">
 </a>
     <script src="js/main.js"></script>
+    <script>
+const emergencyIcon = document.querySelector("#phone-tada a");
+const emergencyMenu = document.getElementById("emergency-menu");
+
+// Show menu on hover over icon
+emergencyIcon.addEventListener("mouseenter", () => {
+    emergencyMenu.style.display = "block";
+});
+
+// Keep menu visible if mouse enters the menu
+emergencyMenu.addEventListener("mouseenter", () => {
+    emergencyMenu.style.display = "block";
+});
+
+// Hide menu when mouse leaves both icon and menu
+emergencyIcon.addEventListener("mouseleave", () => {
+    setTimeout(() => {
+        if (!emergencyMenu.matches(':hover')) {
+            emergencyMenu.style.display = "none";
+        }
+    }, 200);
+});
+
+emergencyMenu.addEventListener("mouseleave", () => {
+    emergencyMenu.style.display = "none";
+});
+
+// Optional: toggle on click for mobile/touch
+emergencyIcon.addEventListener("click", () => {
+    emergencyMenu.style.display = emergencyMenu.style.display === "block" ? "none" : "block";
+});
+</script>
+
     </body>
 
 </html>
