@@ -13,7 +13,7 @@ from flask import (
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from reference import generate_ai_reference, generate_ai_checkup_reference
-
+from app.llama_service import ask_health_assistant, ask_emergency
 
 # -----------------------------
 # Flask Setup
@@ -54,7 +54,6 @@ def save_ambulance_request(data):
     existing.append(data)
     with open(AMBULANCE_JSON, "w") as f:
         json.dump(existing, f, indent=4)
-
 
 # -----------------------------
 # Utilities
@@ -241,6 +240,7 @@ def serve_resource(resource):
     except Exception:
         return ("Not Found", 404)
 
+
 # -----------------------------
 # Protected Health Pages
 # -----------------------------
@@ -328,26 +328,171 @@ def vaccine_form():
     db.session.commit()
     return jsonify({"status": "success", "reference": reference_number}), 200
 
+# -----------------------------
+# Ambulance Booking with AI Assistance
+# -----------------------------
 @app.route("/api/ambulance-booking", methods=["POST"])
 @api_login_required
 def ambulance_booking():
     data = request.form
+    child_name = data["child_name"]
+    emergency_type = data["emergency_type"]
+
+    # Generate unique reference
     ref = "AMB-" + datetime.now().strftime("%Y%m%d") + "-" + ''.join(random.choices(string.ascii_uppercase + string.digits, k=5))
+    hospitals = ["Mediclinic", "Netcare", "Life Healthcare", "Charlotte Maxeke Hospital"]
+    selected_hospital = random.choice(hospitals)
+
     entry = AmbulanceBooking(
-        child_name=data["child_name"],
+        child_name=child_name,
         class_name=data["class_name"],
-        emergency_type=data["emergency_type"],
+        emergency_type=emergency_type,
         description=data["description"],
         reference_number=ref
     )
     db.session.add(entry)
     db.session.commit()
-    return jsonify({"status": "success", "reference": ref})
+    save_ambulance_request({
+        "reference_number": ref,
+        "child_name": child_name,
+        "class_name": data["class_name"],
+        "emergency_type": emergency_type,
+        "description": data["description"],
+        "hospital": selected_hospital,
+        "timestamp": datetime.now().isoformat()
+    })
+
+    eta_minutes = random.randint(5, 15)
+
+    # Fetch previous illness records
+    previous_records = SickLog.query.filter_by(child_name=child_name).all()
+    previous_illnesses = [
+        {"date": r.date, "symptoms": r.symptoms, "description": r.description} for r in previous_records
+    ]
+
+    suggested_actions = [
+        "Keep the child calm and comfortable.",
+        "Check the child's breathing and pulse if necessary.",
+        "Prepare any relevant medical information for the ambulance staff.",
+        "Clear a safe path for the ambulance to reach you quickly.",
+        "Stay on the phone with emergency services if advised."
+    ]
+
+    # AI guidance based on previous illnesses
+    ai_suggestions = []
+    if previous_illnesses:
+        ai_suggestions.append(
+            f"Previous illnesses for {child_name}: " +
+            ", ".join([r["symptoms"] for r in previous_illnesses[-3:]]) +
+            ". Monitor for similar symptoms."
+        )
+
+    # Emergency-specific guidance
+    emergency_guidance = []
+    if "fever" in emergency_type.lower():
+        emergency_guidance = [
+            "Monitor the child's temperature regularly.",
+            "Keep the child hydrated.",
+            "Do not give any medication unless prescribed by a doctor.",
+            "Remove excess clothing and keep the room cool."
+        ]
+    elif "injury" in emergency_type.lower() or "cut" in emergency_type.lower():
+        emergency_guidance = [
+            "Apply gentle pressure to stop any bleeding.",
+            "Keep the injured area elevated if possible.",
+            "Do not try to move the child if there is suspected fracture.",
+            "Keep the child calm and still."
+        ]
+    elif "allergic" in emergency_type.lower():
+        emergency_guidance = [
+            "Check if the child has an epinephrine auto-injector and use if prescribed.",
+            "Remove any allergen from immediate environment.",
+            "Monitor breathing and pulse continuously.",
+            "Keep the child calm and lying down."
+        ]
+    elif "breathing" in emergency_type.lower() or "asthma" in emergency_type.lower():
+        emergency_guidance = [
+            "Help the child sit upright.",
+            "Give prescribed inhaler if available.",
+            "Keep airways clear and calm the child.",
+            "Monitor breathing closely until help arrives."
+        ]
+    else:
+        emergency_guidance = ["Follow general first-aid measures and keep the child comfortable."]
+
+    ai_suggestions.extend(emergency_guidance)
+
+    return jsonify({
+        "status": "success",
+        "reference": ref,
+        "hospital": selected_hospital,
+        "eta_minutes": eta_minutes,
+        "message": f"Ambulance request sent to {selected_hospital}. Help is on the way! ETA: {eta_minutes} minutes.",
+        "suggested_actions": suggested_actions,
+        "ai_suggestions": ai_suggestions,
+        "previous_illnesses": previous_illnesses
+    }), 200
 
 # -----------------------------
-# AI Health Assistant & Admin
+# AI Health Assistant Endpoint
 # -----------------------------
-# ... Keep your AI / admin routes as-is, all API-protected if needed
+@app.route("/api/ask-ai", methods=["POST"])
+@api_login_required
+def ask_ai():
+    """
+    Handles chatbot requests using the local Llama module.
+    Optional: child_name and age for personalized guidance.
+    """
+    data = request.get_json(silent=True) or {}
+    question = data.get("question", "").strip()
+    child_name = data.get("child_name", "").strip()
+    age = data.get("age")  # Optional: pass age in years
+
+    if not question:
+        return jsonify({"answer": "❗ Please ask a valid question."})
+
+    # Optional: fetch past sickness history
+    sickness_history = []
+    if child_name:
+        logs = SickLog.query.filter_by(child_name=child_name).all()
+        for log in logs:
+            sickness_history.append(f"{log.date}: {log.symptoms} - {log.description}")
+
+    # Prepare prompt category
+    category = data.get("category", "General")
+
+    try:
+        # If age is provided, use integer; otherwise default to 3 years
+        age_int = int(age) if age else 3
+
+        # Call your Llama wrapper
+        answer = ask_health_assistant(question=question, category=category, age=age_int)
+
+        # Include sickness history in response if available
+        if sickness_history:
+            history_text = "\n".join(sickness_history)
+            answer = f"{answer}\n\nChild sickness history:\n{history_text}"
+
+    except Exception as e:
+        print("Llama API error:", e)
+        answer = "❗ Sorry, the AI service is temporarily unavailable."
+
+    return jsonify({"answer": answer})
+
+# -----------------------------
+# Admin Health Rules Management
+# -----------------------------
+
+@app.route("/admin/health-rules", methods=["POST"])
+def update_rules():
+   if session.get("role") != "admin":
+       return ("Forbidden", 403)
+   new_rules = request.get_json(silent=True) or []
+   RULES_JSON = os.path.join(BASE_DIR, "health_rules.json")
+   with open(RULES_JSON, "w") as f:
+       json.dump(new_rules, f, indent=4)
+   return jsonify({"status": "success"})
+
 
 # -----------------------------
 # Demo Data

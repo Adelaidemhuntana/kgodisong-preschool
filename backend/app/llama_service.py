@@ -96,3 +96,4 @@ def ask_emergency(question: str, age: str):
         }
     ]
     return call_llama(messages)
+print(ask_emergency("I am sick", 12))

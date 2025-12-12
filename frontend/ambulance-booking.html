@@ -23,6 +23,28 @@
             from { opacity: 0; transform: translateY(5px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        .response-section h4 {
+            margin-bottom: 8px;
+        }
+        .response-section ul {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        .critical {
+            color: red;
+            font-weight: bold;
+        }
+        .eta-timer {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .flash {
+            animation: flashAnim 1s infinite;
+        }
+        @keyframes flashAnim {
+            0%, 50%, 100% { opacity: 1; }
+            25%, 75% { opacity: 0; }
+        }
     </style>
 </head>
 <body>
@@ -66,46 +88,104 @@
 </div>
 
 <script>
-    const form = document.getElementById('ambulanceForm');
-    const box = document.getElementById('successBox');
+const form = document.getElementById('ambulanceForm');
+const box = document.getElementById('successBox');
+let countdownInterval;
 
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(form);
 
-        const formData = new FormData(form);
+    fetch('/api/ambulance-booking', {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === "success") {
+            const childName = formData.get('child_name');
+            const className = formData.get('class_name');
+            const emergencyType = formData.get('emergency_type');
 
-        fetch('/api/ambulance-booking', {
-            method: 'POST',
-            body: formData
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.status === "success") {
-                const childName = formData.get('child_name');
-                const className = formData.get('class_name');
-                const emergencyType = formData.get('emergency_type');
+            // Build the response HTML
+            let suggestedActions = "";
+            data.suggested_actions.forEach(a => suggestedActions += `<li>${a}</li>`);
 
-                box.innerHTML = `
-                    <div class="p-3 border rounded shadow-sm bg-light">
-                        <strong class="text-success">🚑 Ambulance Requested!</strong><br>
-                        Reference: <strong>${data.reference}</strong><br>
-                        Child: <strong>${childName}</strong><br>
-                        Class: <strong>${className}</strong><br>
-                        Emergency: <strong>${emergencyType}</strong><br><br>
-                        <small class="text-muted">
-                            🩺 <strong>AI Emergency Dispatcher</strong> has notified the nearest clinic/hospital.<br>
-                            You will receive updates shortly.
-                        </small>
-                    </div>
-                `;
-                box.style.display = 'block';
-                box.classList.add('show');
+            let aiGuidance = "";
+            data.ai_suggestions.forEach(a => {
+                // Highlight critical emergencies and make them flash
+                if (a.toLowerCase().includes("breathing") || a.toLowerCase().includes("seizure") || a.toLowerCase().includes("injury")) {
+                    aiGuidance += `<li class="critical flash">${a}</li>`;
+                } else {
+                    aiGuidance += `<li>${a}</li>`;
+                }
+            });
 
-                form.reset();
+            let previousIllnesses = "";
+            if (data.previous_illnesses.length > 0) {
+                data.previous_illnesses.forEach(r => {
+                    previousIllnesses += `<li>${r.date}: ${r.symptoms} - ${r.description}</li>`;
+                });
+            } else {
+                previousIllnesses = "<li>No previous illness records.</li>";
             }
-        })
-        .catch(err => console.error(err));
-    });
+
+            // Display initial ETA
+            let etaMinutes = data.eta_minutes;
+
+            box.innerHTML = `
+                <div class="p-3 border rounded shadow-sm bg-light">
+                    <strong class="text-success">🚑 Ambulance Requested!</strong><br>
+                    Reference: <strong>${data.reference}</strong><br>
+                    Child: <strong>${childName}</strong><br>
+                    Class: <strong>${className}</strong><br>
+                    Emergency: <strong>${emergencyType}</strong><br><br>
+
+                    <strong>Hospital Assigned:</strong> ${data.hospital}<br>
+                    <strong>ETA:</strong> <span id="etaTimer" class="eta-timer">${etaMinutes}:00</span> minutes<br><br>
+
+                    <div class="response-section">
+                        <h4>Suggested Actions While Waiting:</h4>
+                        <ul>${suggestedActions}</ul>
+
+                        <h4>AI Guidance:</h4>
+                        <ul>${aiGuidance}</ul>
+
+                        <h4>Previous Illness Records:</h4>
+                        <ul>${previousIllnesses}</ul>
+                    </div>
+                </div>
+            `;
+            box.style.display = 'block';
+            box.classList.add('show');
+
+            form.reset();
+
+            // Clear any previous countdown
+            if (countdownInterval) clearInterval(countdownInterval);
+
+            // Start countdown timer
+            const etaTimer = document.getElementById("etaTimer");
+            let totalSeconds = etaMinutes * 60;
+            countdownInterval = setInterval(() => {
+                if (totalSeconds <= 0) {
+                    etaTimer.textContent = "0:00";
+                    clearInterval(countdownInterval);
+                    alert("🚑 The ambulance should have arrived. Please stay calm and follow instructions.");
+                    return;
+                }
+                totalSeconds--;
+                const minutes = Math.floor(totalSeconds / 60);
+                const seconds = totalSeconds % 60;
+                etaTimer.textContent = `${minutes}:${seconds.toString().padStart(2,'0')}`;
+            }, 1000);
+
+        } else {
+            alert("Error: " + data.message);
+        }
+    })
+    .catch(err => console.error(err));
+});
 </script>
 
 </body>

@@ -1,241 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/chat.css">
+   <link rel="stylesheet" href="css/chat.css">
    <title>AI Health Assistant - Kgodisong Preschool</title>
-
-
-   <!-- <style>
-       /* body {
-           font-family: "Poppins", sans-serif;
-           background: #fff0f7;
-           margin: 0;
-       }
-
-
-       .header {
-           background: #fd96ca;
-           color: white;
-           text-align: center;
-           padding: 20px;
-           font-size: 28px;
-           font-weight: bold;
-           border-bottom-left-radius: 30px;
-           border-bottom-right-radius: 30px;
-       }
-
-
-       .chat-container {
-           max-width: 650px;
-           margin: 20px auto;
-           padding: 20px;
-           background: white;
-           border-radius: 18px;
-           box-shadow: 0 0 10px rgba(214, 51, 132, 0.2);
-           border-left: 6px solid #fc7dbd;
-       }
-
-
-       .messages {
-           height: 400px;
-           overflow-y: auto;
-           padding: 15px;
-           border-radius: 12px;
-           background: #ffe6f2;
-           border: 2px solid #f5c1da;
-       }
-
-
-       .bubble {
-           padding: 12px 15px;
-           border-radius: 15px;
-           margin-bottom: 12px;
-           max-width: 80%;
-           line-height: 1.4;
-           font-size: 15px;
-       }
-
-
-       .user {
-           background:#fd96ca;
-           color: white;
-           margin-left: auto;
-           border-bottom-right-radius: 3px;
-       }
-
-
-       .bot {
-           background: white;
-           color: #fd85c1;
-           border: 2px solid #f5c1da;
-           border-bottom-left-radius: 3px;
-       }
-
-
-       .input-box {
-           display: flex;
-           margin-top: 15px;
-       }
-
-
-       input {
-           flex: 1;
-           padding: 12px;
-           border-radius: 10px;
-           border: 2px solid #f5c1da;
-           font-size: 15px;
-       }
-
-
-       button {
-           padding: 12px 18px;
-           background: #fa6fb4;
-           border: none;
-           margin-left: 10px;
-           color: white;
-           border-radius: 10px;
-           cursor: pointer;
-           font-weight: bold;
-       }
-
-
-       button:hover {
-           background: #fa81bd;
-       }
-
-
-       .footer {
-           text-align: center;
-           color: gray;
-           font-size: 13px;
-           margin-top: 20px;
-       } */
-   </style> -->
+   <style>
+       body { font-family: "Poppins", sans-serif; background: #fff0f7; margin: 0; }
+       .header { background: #fd96ca; color: white; text-align: center; padding: 20px; font-size: 28px; font-weight: bold; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; display: flex; justify-content: center; align-items: center; gap: 10px; }
+       .chat-container { max-width: 650px; margin: 20px auto; padding: 20px; background: white; border-radius: 18px; box-shadow: 0 0 10px rgba(214, 51, 132, 0.2); border-left: 6px solid #fc7dbd; }
+       .messages { height: 400px; overflow-y: auto; padding: 15px; border-radius: 12px; background: #ffe6f2; border: 2px solid #f5c1da; }
+       .bubble { padding: 12px 15px; border-radius: 15px; margin-bottom: 12px; max-width: 80%; line-height: 1.4; font-size: 15px; }
+       .user { background: #fd96ca; color: white; margin-left: auto; border-bottom-right-radius: 3px; }
+       .bot { background: white; color: #fd85c1; border: 2px solid #f5c1da; border-bottom-left-radius: 3px; }
+       .input-box { display: flex; flex-direction: column; margin-top: 15px; gap: 10px; }
+       .input-box input { padding: 12px; border-radius: 10px; border: 2px solid #f5c1da; font-size: 15px; width: 100%; }
+       .input-box button { padding: 12px 18px; background: #fa6fb4; border: none; color: white; border-radius: 10px; cursor: pointer; font-weight: bold; }
+       .input-box button:hover { background: #fa81bd; }
+       .footer { text-align: center; color: gray; font-size: 13px; margin-top: 20px; }
+   </style>
 </head>
-
-
 <body>
 
-
-   <div class="header">
-   <a href="index.html" style="color: white; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px;">
-       <img src="img/chatbot-icon.png" alt="AI Chatbot" style="width:40px; height:40px;">
-       AI Health Assistant
-   </a>
+<div class="header">
+    <img src="img/chatbot-icon.png" alt="AI Chatbot" style="width:40px; height:40px;">
+    AI Health Assistant
 </div>
 
+<div class="chat-container">
+    <div class="messages" id="messages"></div>
+    <div class="input-box">
+        <input type="text" id="childName" placeholder="Child's name (optional)">
+        <input type="text" id="userInput" placeholder="Ask about symptoms, behaviour, or child health…">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
 
+<div class="footer">Kgodisong Preschool</div>
 
+<script>
+    const messages = document.getElementById("messages");
+    const userInput = document.getElementById("userInput");
+    const childInput = document.getElementById("childName");
 
-   <div class="chat-container">
+    function addMessage(text, sender) {
+        const div = document.createElement("div");
+        div.classList.add("bubble", sender);
+        div.innerHTML = text;
+        messages.appendChild(div);
+        messages.scrollTop = messages.scrollHeight;
+    }
 
+    async function sendMessage() {
+        const text = userInput.value.trim();
+        const childName = childInput.value.trim();
+        if (!text) return;
 
-       <div class="messages" id="messages"></div>
+        // Show user bubble
+        addMessage(text, "user");
+        userInput.value = "";
 
+        // Show typing bubble
+        const typingBubble = document.createElement("div");
+        typingBubble.classList.add("bubble", "bot");
+        typingBubble.innerHTML = "⏳ Thinking…";
+        messages.appendChild(typingBubble);
+        messages.scrollTop = messages.scrollHeight;
 
-       <div class="input-box">
-           <input type="text" id="userInput" placeholder="Ask about symptoms, behaviour, or child health…">
-           <button onclick="sendMessage()">Send</button>
-       </div>
+        try {
+            // Call local Flask backend instead of external URL
+            const res = await fetch("http://127.0.0.1:5000/ask-ai", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ question: text, child_name: childName })
+            });
 
+            const data = await res.json();
+            typingBubble.remove();
+            addMessage(data.answer, "bot");
 
-   </div>
+        } catch (error) {
+            console.error(error);
+            typingBubble.remove();
+            addMessage("❗ Sorry, I couldn't reach the AI service. Please try again.", "bot");
+        }
+    }
 
+    // Enter key support
+    userInput.addEventListener("keypress", function(e) {
+        if (e.key === "Enter") sendMessage();
+    });
 
-   <div class="footer">
-       Kgodisong Preschool
-   </div>
-
-
-   <script>
-       const messages = document.getElementById("messages");
-
-
-       function addMessage(text, sender) {
-           const div = document.createElement("div");
-           div.classList.add("bubble", sender);
-           div.innerHTML = text;
-           messages.appendChild(div);
-           messages.scrollTop = messages.scrollHeight;
-       }
-
-
-       async function sendMessage() {
-           const input = document.getElementById("userInput");
-           const text = input.value.trim();
-
-
-           if (text === "") return;
-
-
-           // user bubble
-           addMessage(text, "user");
-
-
-           // clear input
-           input.value = "";
-
-
-           // show typing bubble
-           const typingBubble = document.createElement("div");
-           typingBubble.classList.add("bubble", "bot");
-           typingBubble.innerHTML = "⏳ Thinking…";
-           messages.appendChild(typingBubble);
-           messages.scrollTop = messages.scrollHeight;
-
-
-           // SEND REQUEST TO BACKEND /ask-ai
-           try {
-               const res = await fetch("https://test-vhzs.onrender.com/ask-ai", {
-                   method: "POST",
-                   headers: {
-                       "Content-Type": "application/json"
-                   },
-                   body: JSON.stringify({
-                       question: text,
-                       category: "General",
-                       age: "1 - 6 years"
-                   })
-               });
-
-
-               const data = await res.json();
-
-
-               // remove typing bubble
-               typingBubble.remove();
-
-
-               // Add AI response
-               addMessage(data.answer, "bot");
-
-
-           } catch (error) {
-               console.error("Error:", error);
-               typingBubble.remove();
-               addMessage("❗ Sorry, I couldn't reach the AI service. Please try again.", "bot");
-           }
-       }
-
-
-       // ENTER KEY SUPPORT
-       document.getElementById("userInput").addEventListener("keypress", function(e) {
-           if (e.key === "Enter") sendMessage();
-       });
-
-
-       // Initial greeting
-       addMessage("Hello! I'm Ilama, your child-safe health assistant. How can I help today?, Please specify the age of the child in any query.", "bot");
-   </script>
-
-
-
+    // Initial greeting
+    addMessage("Hello! I'm Ilama, your child-safe health assistant. How can I help today? Please specify the age of the child in any query.", "bot");
+</script>
 
 </body>
-
-
 </html>
