@@ -437,7 +437,6 @@ def ambulance_booking():
 # AI Health Assistant Endpoint
 # -----------------------------
 @app.route("/api/ask-ai", methods=["POST"])
-@api_login_required
 def ask_ai():
     """
     Handles chatbot requests using the local Llama module.
@@ -445,33 +444,18 @@ def ask_ai():
     """
     data = request.get_json(silent=True) or {}
     question = data.get("question", "").strip()
-    child_name = data.get("child_name", "").strip()
-    age = data.get("age")  # Optional: pass age in years
+    age = data.get("age", "unknown").strip()
 
     if not question:
         return jsonify({"answer": "❗ Please ask a valid question."})
-
-    # Optional: fetch past sickness history
-    sickness_history = []
-    if child_name:
-        logs = SickLog.query.filter_by(child_name=child_name).all()
-        for log in logs:
-            sickness_history.append(f"{log.date}: {log.symptoms} - {log.description}")
 
     # Prepare prompt category
     category = data.get("category", "General")
 
     try:
-        # If age is provided, use integer; otherwise default to 3 years
-        age_int = int(age) if age else 3
 
         # Call your Llama wrapper
-        answer = ask_health_assistant(question=question, category=category, age=age_int)
-
-        # Include sickness history in response if available
-        if sickness_history:
-            history_text = "\n".join(sickness_history)
-            answer = f"{answer}\n\nChild sickness history:\n{history_text}"
+        answer = ask_health_assistant(question, age)
 
     except Exception as e:
         print("Llama API error:", e)

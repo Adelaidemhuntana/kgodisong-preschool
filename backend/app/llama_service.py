@@ -36,7 +36,7 @@ def call_llama(messages, model="llama-3.1-8b-instant", **kwargs):
         return "Sorry, the AI service is temporarily unavailable."
 
 
-def ask_health_assistant(question: str, category: str, age: int):
+def ask_health_assistant(question: str, age: str):
     """
     Safe child-health assistant wrapper.
     Applies safety rules, disclaimers, and structured prompts.
@@ -53,9 +53,8 @@ def ask_health_assistant(question: str, category: str, age: int):
     """
 
     user_prompt = f"""
-    Category: {category}
-    Child age: {age}
     Question: {question}
+    Age range: {age}
     
     Provide:
     1. Immediate safe steps parents can do at home.
@@ -71,7 +70,7 @@ def ask_health_assistant(question: str, category: str, age: int):
     return call_llama(messages)
 
 
-def ask_emergency(question: str, age: str):
+def ask_emergency(question: str):
     """
     Returns structured JSON using function-calling pattern
     """
@@ -96,4 +95,3 @@ def ask_emergency(question: str, age: str):
         }
     ]
     return call_llama(messages)
-print(ask_emergency("I am sick", 12))
