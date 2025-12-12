@@ -2,112 +2,99 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <title>Kgodisong Health Hub</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+   <meta charset="utf-8">
+   <title>Kgodisong Health Hub</title>
+   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/hub.css">
-
-    <!-- <style> -->
-        <!-- /* Pink curved hub cards
-        .hub-card {
-            background: #ffffff;
-            border: 3px solid #f187bc;
-            border-radius: 50% 20% / 10% 40%;
-            padding: 30px;
-            text-align: center;
-            color: #333;
-            transition: 0.3s ease-in-out;
-        }
-
-        .hub-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 18px rgba(214, 51, 132, 0.25);
-        }
-
-        .hub-title {
-            color: #f187bc;
-            font-weight: bold;
-            font-size: 22px;
-            margin-bottom: 10px;
-        }
-
-        .hub-text {
-            color: #555;
-            font-size: 15px;
-        } */
-    </style> -->
+   <link href="css/bootstrap.min.css" rel="stylesheet">
+   <link href="css/style.css" rel="stylesheet">
+   <link rel="stylesheet" href="css/hub.css">
 </head>
 
 <body>
 
+<!-- 🔐 LOGOUT BUTTON -->
+<div style="position: absolute; top: 20px; right: 30px;">
+    <a href="/logout" 
+       style="
+           background:#f187bc; 
+           padding:8px 18px; 
+           border-radius:8px;
+           color:white; 
+           text-decoration:none; 
+           font-weight:600;
+           box-shadow:0 3px 8px rgba(0,0,0,0.15);
+       ">
+       Logout
+    </a>
+</div>
+<!-- END LOGOUT -->
+
 <div class="container py-5">
-   <h1 class="text-center mb-4 display-6" style="font-family: 'Montserrat', sans-serif; font-weight:200;">
-    <span style="color:#f187bc;">Kgodisong</span>
-    <span class="text-secondary">Health Hub</span>
-</h1>
+  <h1 class="text-center mb-4 display-6" style="font-family: 'Montserrat', sans-serif; font-weight:200;">
+   <a href="index.html"><span style="color:#f187bc;">Kgodisong</span>
+   <span class="text-secondary">Health Hub</span></a>
+  </h1>
 
-    <p class="text-center mb-5 text-dark">Choose a service you want to access</p>
+   <p class="text-center mb-5 text-dark">Choose a service you want to access</p>
 
-    <div class="row g-4">
+   <div class="row g-4">
 
-        <div class="col-md-4">
-            <a href="Immunization-Booking.html" class="text-decoration-none">
-                <div class="hub-card">
-                    <div class="hub-title">Vaccination Booking</div>
-                    <p class="hub-text">Schedule immunizations & checkups</p>
-                </div>
-            </a>
-        </div>
+       <div class="col-md-4">
+           <a href="Immunization-Booking.html" class="text-decoration-none">
+               <div class="hub-card">
+                   <div class="hub-title">Vaccination Booking</div>
+                   <p class="hub-text">Schedule immunizations & checkups</p>
+               </div>
+           </a>
+       </div>
 
-        <div class="col-md-4">
-            <a href="sick-log.html" class="text-decoration-none">
-                <div class="hub-card">
-                    <div class="hub-title">Log Sickness</div>
-                    <p class="hub-text">Report fever, flu, tummy bug & more</p>
-                </div>
-            </a>
-        </div>
+       <div class="col-md-4">
+           <a href="sick-log.html" class="text-decoration-none">
+               <div class="hub-card">
+                   <div class="hub-title">Log Sickness</div>
+                   <p class="hub-text">Report fever, flu, tummy bug & more</p>
+               </div>
+           </a>
+       </div>
 
-        <div class="col-md-4">
-            <a href="eye-dental-booking.html" class="text-decoration-none">
-                <div class="hub-card">
-                    <div class="hub-title">Eye & Dental Check</div>
-                    <p class="hub-text">Book school partner screenings</p>
-                </div>
-            </a>
-        </div>
+       <div class="col-md-4">
+           <a href="eye-dental-booking.html" class="text-decoration-none">
+               <div class="hub-card">
+                   <div class="hub-title">Eye & Dental Check</div>
+                   <p class="hub-text">Book school partner screenings</p>
+               </div>
+           </a>
+       </div>
 
-        <div class="col-md-4">
-            <a href="pharmacy.html" class="text-decoration-none">
-                <div class="hub-card">
-                    <div class="hub-title">School Pharmacy</div>
-                    <p class="hub-text">Get symptom-based help</p>
-                </div>
-            </a>
-        </div>
+       <div class="col-md-4">
+           <a href="pharmacy.html" class="text-decoration-none">
+               <div class="hub-card">
+                   <div class="hub-title">School Pharmacy</div>
+                   <p class="hub-text">Get symptom-based help</p>
+               </div>
+           </a>
+       </div>
 
-        <div class="col-md-4">
-            <a href="ambulance-booking.html" class="text-decoration-none">
-                <div class="hub-card">
-                    <div class="hub-title">Ambulance</div>
-                    <p class="hub-text">Request emergency transport</p>
-                </div>
-            </a>
-        </div>
+       <div class="col-md-4">
+           <a href="ambulance-booking.html" class="text-decoration-none">
+               <div class="hub-card">
+                   <div class="hub-title">Ambulance</div>
+                   <p class="hub-text">Request emergency transport</p>
+               </div>
+           </a>
+       </div>
 
-        <div class="col-md-4">
-            <a href="chatbot.html" class="text-decoration-none">
-                <div class="hub-card">
-                    <div class="hub-title">AI Health Chatbot</div>
-                    <p class="hub-text">Ask questions about child health</p>
-                </div>
-            </a>
-        </div>
+       <div class="col-md-4">
+           <a href="chatbot.html" class="text-decoration-none">
+               <div class="hub-card">
+                   <div class="hub-title">AI Health Chatbot</div>
+                   <p class="hub-text">Ask questions about child health</p>
+               </div>
+           </a>
+       </div>
 
-    </div>
+   </div>
 </div>
 
 </body>

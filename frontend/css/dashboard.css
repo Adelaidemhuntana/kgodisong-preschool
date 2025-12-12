@@ -1,0 +1,132 @@
+:root {
+    --pink-main: #d63384;
+    --pink-light: #f7b3d1;
+    --pink-lighter: #fde6f1;
+    --pink-dark: #b0226c;
+    --bs-white: #fff;
+    --bs-light: #f8f9fa;
+    --bs-secondary: #ff82c0;
+    --bs-primary: #d63384;
+    --bs-dark: #333;
+}
+
+body {
+    background-color: #fff5fa;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: var(--pink-main);
+}
+
+.page-title {
+    color: var(--pink-main);
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.card {
+    border-radius: 20px !important;
+    border: none !important;
+    background: #ffffff;
+    box-shadow: 0px 4px 12px rgba(214, 51, 132, 0.2);
+    transition: 0.3s;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(214, 51, 132, 0.28);
+}
+
+.btn-pink {
+    background-color: var(--pink-main) !important;
+    border-radius: 30px !important;
+    color: white !important;
+    padding: 12px 25px !important;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-pink:hover {
+    background-color: var(--pink-dark) !important;
+    color: white !important;
+}
+
+.btn-outline-pink {
+    border: 2px solid var(--pink-main) !important;
+    color: var(--pink-main) !important;
+    border-radius: 30px !important;
+    font-weight: 600;
+    padding: 10px 20px;
+    transition: 0.3s;
+}
+
+.btn-outline-pink:hover {
+    background-color: var(--pink-main) !important;
+    color: white !important;
+}
+
+input, select, textarea {
+    border-radius: 12px !important;
+    border: 1px solid var(--pink-light) !important;
+    padding: 10px;
+    width: 100%;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--pink-main) !important;
+    box-shadow: 0 0 0 0.2rem rgba(214, 51, 132, 0.25) !important;
+    outline: none;
+}
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.dashboard-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.dashboard-card {
+    flex: 1 1 calc(33% - 20px);
+    min-width: 250px;
+}
+
+.dashboard-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--pink-main);
+}
+
+.dashboard-card p {
+    color: #555;
+}
+
+/* Optional: Floating chatbot icon */
+.chatbot-launch {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.chatbot-icon {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.chatbot-icon:hover {
+    transform: scale(1.1);
+}

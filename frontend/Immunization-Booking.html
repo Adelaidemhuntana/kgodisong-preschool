@@ -1,89 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
-    <meta charset="utf-8">
-    <title>immunization Booking | Kgodisong Health Hub</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+   <meta charset="utf-8">
+   <title>Immunization Booking | Kgodisong Health Hub</title>
+   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <!-- Bootstrap & CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
 
+   <!-- Bootstrap & CSS -->
+   <link href="css/bootstrap.min.css" rel="stylesheet">
+   <link href="css/style.css" rel="stylesheet">
 </head>
+
 
 <body>
 
-Redirect if not logged in
+
 <script>
-    if (!localStorage.getItem('loggedIn')) {
-        window.location.href = "login.html";
-    }
+   // Redirect if not logged in
+   fetch("/api/check-session")
+       .then(res => res.json())
+       .then(data => {
+           if (!data.logged_in) {
+               window.location.href = "/login";
+           }
+       });
 </script>
+
 
 <div class="container py-5">
-    <h1 class="page-title text-center mb-4">Vaccination & immunization Booking</h1>
-    <p class="text-center mb-5">Book your child's immunization or health check</p>
+   <h1 class="page-title text-center mb-4"><a href="hub-dashboard.html"> Vaccination & Immunization Booking</a></h1>
+   <p class="text-center mb-5">Book your child's immunization or health check</p>
 
-    <div class="row justify-content-center">
-        <div class="col-lg-6">
 
-            <div class="card p-4 shadow-lg">
-                <form id="vaccineForm">
+   <div class="row justify-content-center">
+       <div class="col-lg-6">
+           <div class="card p-4 shadow-lg">
+               <form id="vaccineForm" method="POST" action="/api/vaccine-booking">
+                   <div class="mb-3">
+                       <label class="form-label">Child Name</label>
+                       <input name="child_name" type="text" class="form-control" placeholder="Enter child’s full name" required>
+                   </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Child Name</label>
-                        <input type="text" class="form-control" placeholder="Enter child’s full name" required>
-                    </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Grade / Class</label>
-                        <input type="text" class="form-control" placeholder="e.g. Grade R, Mickey Class" required>
-                    </div>
+                   <div class="mb-3">
+                       <label class="form-label">Grade / Class</label>
+                       <input name="grade" type="text" class="form-control" placeholder="e.g. Grade R, Mickey Class" required>
+                   </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Select Vaccine Type</label>
-                        <select class="form-control" required>
-                            <option value="">-- Choose vaccine --</option>
-                            <option>Measles</option>
-                            <option>Polio</option>
-                            <option>BCG</option>
-                            <option>Immunization</option>
-                            <option>Chickenpox</option>
-                            <option>General Health Check</option>
-                        </select>
-                    </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Preferred Date</label>
-                        <input type="date" class="form-control" required>
-                    </div>
+                   <div class="mb-3">
+                       <label class="form-label">Select Vaccine Type</label>
+                       <select name="vaccine_type" class="form-control" required>
+                           <option value="">-- Choose vaccine --</option>
+                           <option>Measles</option>
+                           <option>Polio</option>
+                           <option>BCG</option>
+                           <option>Immunization</option>
+                           <option>Chickenpox</option>
+                           <option>General Health Check</option>
+                       </select>
+                   </div>
 
-                    <div class="d-grid">
-                        <button class="btn btn-pink btn-lg" type="submit">Book Appointment</button>
-                    </div>
-                </form>
 
-                <p id="successMessage" class="text-center text-success mt-4" style="display:none;">
-                    ✔ Booking submitted! The school will confirm soon.
-                </p>
-            </div>
+                   <div class="mb-3">
+                       <label class="form-label">Preferred Date</label>
+                       <input name="date" type="date" class="form-control" required>
+                   </div>
 
-        </div>
-    </div>
+
+                   <div class="d-grid">
+                       <button class="btn btn-pink btn-lg" type="submit">Book Appointment</button>
+                   </div>
+               </form>
+
+
+               <p id="successMessage" class="text-center text-success mt-4" style="display:none;">
+                   ✔ Booking submitted! The school will confirm soon.
+               </p>
+           </div>
+       </div>
+   </div>
 </div>
 
-<!-- JS -->
+
 <script>
-    document.getElementById('vaccineForm').addEventListener('submit', function (e) {
-        e.preventDefault();
+   // Submit form via fetch to show success without reload
+document.getElementById('vaccineForm').addEventListener('submit', function (e) {
+    e.preventDefault();
 
-        // Backend will replace this
-        document.getElementById('successMessage').style.display = 'block';
+    const form = e.target;
+    const data = new FormData(form);
 
-        console.log("VACCINE BOOKING SENT TO BACKEND");
-    });
+    fetch("/api/vaccine-booking", {
+        method: "POST",
+        body: data
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === "success") {
+
+            const msg = document.getElementById('successMessage');
+
+            // AI Clinic Illusion Message
+            msg.innerHTML = `
+                <div class="p-3 border rounded shadow-sm bg-light">
+                    <strong class="text-success">✔ Booking Confirmed</strong><br>
+                    Reference: <strong>${data.reference}</strong><br><br>
+
+                    <small class="text-muted">
+                        🩺 <strong>AI Health Dispatcher</strong> has securely transmitted<br>
+                        this immunization request to <strong>Medi-clinic</strong> for review.<br>
+                        You will receive a follow-up once the clinic confirms.
+                    </small>
+                </div>
+            `;
+
+            // Show animated message
+            msg.style.display = "block";
+            msg.classList.add("show");
+
+            form.reset();
+        }
+    })
+    .catch(err => console.error(err));
+});
+
 </script>
+
 
 </body>
 </html>
